@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #0a0a0a;
+  --background: #fafaf9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #fef3c7 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.pattern-grid {
+  background-image: 
+    linear-gradient(rgba(22, 163, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 163, 74, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.whatsapp-gradient {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -30px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(30px, 10px) scale(1.05); }
+}
+
+.animate-blob {
+  animation: blob 12s infinite ease-in-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
