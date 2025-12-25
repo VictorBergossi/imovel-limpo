@@ -19,10 +19,11 @@ export function HeroDemo() {
 
   const messages: Message[] = [
     { id: 1, type: 'bot', content: 'Olá! 👋 Envie a matrícula ou número + cartório.', delay: 1500 },
-    { id: 2, type: 'user', content: '📄 Matrícula_Apt_Moema.pdf', delay: 1500 },
-    { id: 3, type: 'bot', content: '🔍 Analisando matrícula...', delay: 1200 },
+    { id: 2, type: 'user', content: 'Matrícula 45.892 - 5º RI SP', delay: 1500 },
+    { id: 3, type: 'bot', content: '🔍 Buscando matrícula atualizada...', delay: 1200 },
     { id: 4, type: 'bot', content: '📑 Verificando certidões...', delay: 1200 },
-    { id: 5, type: 'bot', content: 'result', delay: 1500 },
+    { id: 5, type: 'bot', content: '⚠️ Pendência encontrada!', delay: 1000 },
+    { id: 6, type: 'bot', content: 'result', delay: 1500 },
   ]
 
   // Auto-start after 1.5 seconds
@@ -76,38 +77,39 @@ export function HeroDemo() {
 
   const ResultCard = () => (
     <div className="space-y-2 animate-fade-in">
-      <div className="flex items-center gap-2 text-brand-600 font-bold text-sm">
-        <span>✅</span> Análise Completa
+      <div className="flex items-center gap-2 text-amber-600 font-bold text-sm">
+        <span>⚠️</span> Análise Completa
       </div>
       
-      <div className="bg-brand-50 rounded-lg p-2">
+      <div className="bg-amber-50 rounded-lg p-2">
         <div className="flex items-center justify-between">
-          <span className="text-brand-700 text-xs">Status</span>
-          <span className="font-bold text-brand-600 text-sm flex items-center gap-1">
-            <span className="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span>
-            LIMPO
+          <span className="text-amber-700 text-xs">Status</span>
+          <span className="font-bold text-amber-600 text-sm flex items-center gap-1">
+            <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+            ATENÇÃO
           </span>
         </div>
       </div>
 
       <div className="space-y-1 text-xs">
         <div className="flex justify-between py-1 border-b border-gray-100">
-          <span className="text-gray-500">Ônus/Gravames</span>
-          <span className="text-brand-600 font-medium">Nenhum ✓</span>
+          <span className="text-gray-500">Matrícula</span>
+          <span className="text-red-600 font-medium">Penhora ⚠️</span>
         </div>
         <div className="flex justify-between py-1 border-b border-gray-100">
-          <span className="text-gray-500">Certidões</span>
+          <span className="text-gray-500">Certidão Trabalhista</span>
+          <span className="text-red-600 font-medium">1 processo ⚠️</span>
+        </div>
+        <div className="flex justify-between py-1 border-b border-gray-100">
+          <span className="text-gray-500">Demais certidões</span>
           <span className="text-brand-600 font-medium">OK ✓</span>
-        </div>
-        <div className="flex justify-between py-1 border-b border-gray-100">
-          <span className="text-gray-500">Processos</span>
-          <span className="text-brand-600 font-medium">Nenhum ✓</span>
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-brand-500 to-brand-600 text-white rounded-lg p-3 text-center">
+      <div className="bg-gradient-to-r from-amber-500 to-red-500 text-white rounded-lg p-3 text-center">
         <p className="text-xs opacity-80">Previsão comissão</p>
-        <p className="text-2xl font-bold">~35 dias</p>
+        <p className="text-2xl font-bold">~120 dias</p>
+        <p className="text-xs opacity-80">Alto risco</p>
       </div>
     </div>
   )
