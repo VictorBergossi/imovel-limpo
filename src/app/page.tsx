@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Logo } from '@/components/Logo'
+import { HeroDemo } from '@/components/HeroDemo'
 
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''
 
@@ -217,38 +218,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* WhatsApp Mockup */}
+            {/* Demo Interativa */}
             <div className="relative">
-              <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-6 max-w-sm mx-auto">
-                <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-                  <Logo className="w-10 h-10" />
-                  <div>
-                    <p className="font-semibold text-gray-900">Imóvel Limpo</p>
-                    <p className="text-xs text-green-600">Online</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 py-4">
-                  <div className="bg-gray-100 rounded-2xl rounded-tl-sm p-3 max-w-[90%]">
-                    <p className="text-sm text-gray-700">📄 Envie o arquivo da matrícula ou o número da matrícula e o cartório.</p>
-                  </div>
-                  
-                  <div className="bg-brand-500 rounded-2xl rounded-tr-sm p-3 max-w-[75%] ml-auto text-white">
-                    <p className="text-sm">Matrícula 123.456 - 5º RI São Paulo</p>
-                  </div>
-
-                  <div className="bg-gray-100 rounded-2xl rounded-tl-sm p-3">
-                    <p className="text-sm text-gray-700 mb-2">✅ <strong>Análise completa:</strong></p>
-                    <div className="text-xs text-gray-600 space-y-1">
-                      <p>• Matrícula atualizada: sem ônus</p>
-                      <p>• 2 proprietários anteriores verificados</p>
-                      <p>• Certidões negativas: OK</p>
-                      <p>• Empresa do proprietário: sem processos</p>
-                      <p className="text-brand-700 font-semibold">• Estimativa: 45 dias para comissão</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <HeroDemo />
+              <p className="text-center text-sm text-gray-500 mt-4">
+                ⚡ Demo ao vivo - atualiza automaticamente
+              </p>
             </div>
           </div>
         </div>
