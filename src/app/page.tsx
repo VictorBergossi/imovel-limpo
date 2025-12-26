@@ -11,6 +11,7 @@ export default function Home() {
     nome: '',
     telefone: '',
     email: '',
+    isCorretor: false,
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -41,11 +42,11 @@ export default function Home() {
     setIsLoading(false)
   }
 
-  const painPoints = [
-    "Já perdeu uma venda quente por documentação?",
-    "Financiamento negado por pendência jurídica?",
-    "Esperou meses a mais para receber sua comissão?",
-    "Vendeu imóvel que virou dor de cabeça?",
+  const benefits = [
+    "Matrícula atualizada rapidamente",
+    "Certidões públicas consolidadas",
+    "Status jurídico claro para venda",
+    "Estimativa de tempo para receber sua comissão",
   ]
 
   const steps = [
@@ -121,7 +122,7 @@ export default function Home() {
     },
     {
       question: "Quanto custa o serviço?",
-      answer: "Estamos em fase de lançamento com acesso gratuito para os primeiros usuários. Depois, teremos planos acessíveis para corretores autônomos e imobiliárias.",
+      answer: "Oferecemos um período de teste grátis para você conhecer o serviço. Depois, temos planos acessíveis para corretores autônomos e imobiliárias. Fale conosco pelo WhatsApp para saber mais.",
     },
     {
       question: "Os dados dos imóveis e clientes são seguros?",
@@ -154,25 +155,34 @@ export default function Home() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 rounded-full">
-                <span className="text-brand-600">💬</span>
-                <span className="text-sm font-medium text-brand-700">Integração direta com WhatsApp</span>
+              {/* Prova social em destaque */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 border border-amber-200 rounded-full animate-pulse">
+                <span className="text-amber-600">👥</span>
+                <span className="text-sm font-semibold text-amber-800">+180 corretores já aguardando nosso relatório</span>
               </div>
 
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Descubra em segundos se o imóvel está{' '}
-                <span className="gradient-text">limpo para venda</span>
+                Descubra em segundos se um imóvel está{' '}
+                <span className="gradient-text">pronto para vender</span>
+                {' '}— evite perder tempo e comissão.
               </h1>
 
+              {/* Free Trial */}
+              <div className="inline-flex items-center gap-2 px-5 py-3 bg-brand-50 border border-brand-200 rounded-xl">
+                <span className="text-brand-600 text-lg">🎁</span>
+                <span className="text-brand-800 font-medium"><strong className="text-brand-700">Teste grátis</strong> — experimente sem compromisso por tempo limitado.</span>
+              </div>
+
               <p className="text-xl text-gray-600 leading-relaxed">
-                Análise completa de matrícula, certidões e estimativa de tempo para receber sua comissão. Tudo via WhatsApp.
+                Análise rápida de matrícula, certidões públicas e cenário documental — tudo via WhatsApp.
               </p>
 
+              {/* Benefícios */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {painPoints.map((point, i) => (
-                  <div key={i} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4 hover:bg-red-100 transition-colors">
-                    <span className="flex-shrink-0 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">✗</span>
-                    <span className="text-red-800 font-medium">{point}</span>
+                {benefits.map((benefit, i) => (
+                  <div key={i} className="flex items-center gap-3 bg-brand-50 border border-brand-100 rounded-xl p-4 hover:bg-brand-100 transition-colors">
+                    <span className="flex-shrink-0 w-6 h-6 bg-brand-500 text-white rounded-full flex items-center justify-center text-sm font-bold">✓</span>
+                    <span className="text-brand-800 font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -181,31 +191,20 @@ export default function Home() {
                 <a 
                   href="#cadastro"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 whatsapp-gradient text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg shadow-green-500/30"
+                  data-event="cta_hero_click"
                 >
-                  Quero acesso antecipado
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  Quero testar grátis
                 </a>
                 <a 
                   href="/demo"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
                 >
                   <span>▶️</span>
-                  Ver demo completa
+                  Ver demo
                 </a>
-              </div>
-
-              <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-brand-600">✓</span>
-                  <span className="text-sm text-gray-600">Matrícula atualizada</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-brand-600">✓</span>
-                  <span className="text-sm text-gray-600">Certidões completas</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-brand-600">✓</span>
-                  <span className="text-sm text-gray-600">100% via WhatsApp</span>
-                </div>
               </div>
             </div>
 
@@ -297,34 +296,34 @@ export default function Home() {
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-6">
-                <span>🚀</span>
-                <span className="text-white font-medium">Acesso antecipado</span>
+                <span>🎁</span>
+                <span className="text-white font-medium">Teste grátis por tempo limitado</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-                Entre na lista de espera
+                Experimente sem compromisso
               </h2>
               <p className="text-brand-100 text-lg">
-                Seja um dos primeiros a usar o Imóvel Limpo e ganhe acesso gratuito no lançamento.
+                Deixe seu WhatsApp e ganhe acesso ao período de teste gratuito.
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" data-form="lead_capture">
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1">Seu nome</label>
+                    <label className="block text-sm font-medium text-white mb-1">Nome Completo</label>
                     <input
                       type="text"
                       required
                       value={formData.nome}
                       onChange={(e) => setFormData({...formData, nome: e.target.value})}
                       className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white/20 outline-none"
-                      placeholder="Como podemos te chamar?"
+                      placeholder="Seu nome completo"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1">Seu WhatsApp *</label>
+                    <label className="block text-sm font-medium text-white mb-1">WhatsApp *</label>
                     <input
                       type="tel"
                       required
@@ -346,10 +345,24 @@ export default function Home() {
                     />
                   </div>
 
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="isCorretor"
+                      checked={formData.isCorretor}
+                      onChange={(e) => setFormData({...formData, isCorretor: e.target.checked})}
+                      className="w-5 h-5 rounded border-white/30 bg-white/10 text-brand-500 focus:ring-brand-500 focus:ring-offset-0"
+                    />
+                    <label htmlFor="isCorretor" className="text-sm text-white/90 cursor-pointer">
+                      Sou corretor / imobiliária (CRECI)
+                    </label>
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isLoading}
                     className="w-full py-4 bg-white text-brand-700 rounded-xl font-bold text-lg hover:scale-[1.02] transition-all shadow-lg disabled:opacity-70 flex items-center justify-center gap-2"
+                    data-event="form_submit"
                   >
                     {isLoading ? (
                       <>
@@ -357,12 +370,21 @@ export default function Home() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
                         </svg>
-                        Garantindo vaga...
+                        Enviando...
                       </>
                     ) : (
-                      'Garantir meu acesso'
+                      <>
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Quero testar grátis
+                      </>
                     )}
                   </button>
+
+                  <p className="text-center text-sm text-white/60 mt-2">
+                    📩 Responderemos em até 24h para liberar seu teste grátis.
+                  </p>
                 </form>
               ) : (
                 <div className="text-center py-8">
@@ -370,18 +392,13 @@ export default function Home() {
                     <span className="text-3xl">🎉</span>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-white mb-2">
-                    Você está na lista!
+                    Recebemos seu contato!
                   </h3>
                   <p className="text-white/80">
-                    Vamos te chamar no WhatsApp assim que liberarmos o acesso.
+                    Em breve você receberá um exemplo de relatório no WhatsApp.
                   </p>
                 </div>
               )}
-
-              <div className="flex items-center justify-center gap-2 mt-6 text-sm text-white/70">
-                <span>👥</span>
-                <span>+180 corretores já na lista de espera</span>
-              </div>
             </div>
           </div>
         </div>
@@ -425,6 +442,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Urgência / CTA Final */}
+      <section className="py-12 bg-gradient-to-r from-amber-500 to-orange-500">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+                Corretor: evite perder vendas por documentação inadequada
+              </h3>
+              <p className="text-white/90 text-lg">
+                Teste grátis por tempo limitado — comece agora mesmo.
+              </p>
+            </div>
+            <a 
+              href="#cadastro"
+              className="flex-shrink-0 px-8 py-4 bg-white text-amber-600 rounded-xl font-bold text-lg hover:scale-105 transition-all shadow-lg"
+              data-event="cta_urgencia_click"
+            >
+              Começar teste grátis
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-12 bg-gray-900 text-white">
         <div className="container mx-auto px-6">
@@ -434,16 +474,10 @@ export default function Home() {
               <span className="font-display font-bold text-lg">Imóvel Limpo</span>
             </div>
             
-            <div className="flex items-center gap-6 text-sm text-gray-400">
-              <a href="mailto:contato@imovellimpo.com.br" className="hover:text-white transition-colors flex items-center gap-2">
-                <span>📧</span>
-                contato@imovellimpo.com.br
-              </a>
-              <a href="https://wa.me/5511999999999" className="hover:text-white transition-colors flex items-center gap-2">
-                <span>💬</span>
-                WhatsApp
-              </a>
-            </div>
+            <a href="https://wa.me/5511999999999" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <span>💬</span>
+              Fale conosco pelo WhatsApp
+            </a>
             
             <p className="text-gray-400 text-sm">
               © 2025 Imóvel Limpo. Todos os direitos reservados.
