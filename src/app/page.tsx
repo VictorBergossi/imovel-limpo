@@ -4,43 +4,8 @@ import { useState } from 'react'
 import { Logo } from '@/components/Logo'
 import { HeroDemo } from '@/components/HeroDemo'
 
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''
-
 export default function Home() {
-  const [formData, setFormData] = useState({
-    nome: '',
-    telefone: '',
-    email: '',
-    isCorretor: false,
-  })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    try {
-      if (WEB3FORMS_KEY) {
-        await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject: '🏠 Novo Lead - Imóvel Limpo',
-            from_name: 'Imóvel Limpo',
-            ...formData,
-          }),
-        })
-      }
-      setIsSubmitted(true)
-    } catch (err) {
-      console.error('Erro:', err)
-      setIsSubmitted(true)
-    }
-    setIsLoading(false)
-  }
 
   const benefits = [
     "Matrícula atualizada rapidamente",
@@ -122,7 +87,7 @@ export default function Home() {
     },
     {
       question: "Quanto custa o serviço?",
-      answer: "Oferecemos um período de teste grátis para você conhecer o serviço. Depois, temos planos acessíveis para corretores autônomos e imobiliárias. Fale conosco pelo WhatsApp para saber mais.",
+      answer: "Oferecemos consulta avulsa por R$9,90 e planos a partir de R$47/mês. A matrícula atualizada tem custo adicional de R$25. Se você já tiver a matrícula em PDF, não há custo extra. Todos os planos incluem verificação de certidões e processos dos proprietários.",
     },
     {
       question: "Os dados dos imóveis e clientes são seguros?",
@@ -140,10 +105,10 @@ export default function Home() {
             <span className="font-display font-bold text-xl text-gray-900">Imóvel Limpo</span>
           </div>
           <a 
-            href="#cadastro"
+            href="#planos"
             className="px-5 py-2 bg-brand-600 text-white rounded-full text-sm font-semibold hover:bg-brand-700 transition-all hover:scale-105"
           >
-            Quero acesso
+            Ver planos
           </a>
         </div>
       </header>
@@ -155,22 +120,16 @@ export default function Home() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              {/* Prova social em destaque */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 border border-amber-200 rounded-full animate-pulse">
-                <span className="text-amber-600">👥</span>
-                <span className="text-sm font-semibold text-amber-800">+180 corretores já aguardando nosso relatório</span>
-              </div>
-
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Descubra em segundos se um imóvel está{' '}
                 <span className="gradient-text">pronto para vender</span>
                 {' '}— evite perder tempo e comissão.
               </h1>
 
-              {/* Free Trial */}
+              {/* Indicação de preço */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-brand-50 border border-brand-200 rounded-xl">
-                <span className="text-brand-600 text-lg">🎁</span>
-                <span className="text-brand-800 font-medium"><strong className="text-brand-700">Teste grátis</strong> — experimente sem compromisso por tempo limitado.</span>
+                <span className="text-brand-600 text-lg">💰</span>
+                <span className="text-brand-800 font-medium">Consulta avulsa por <strong className="text-brand-700">R$9,90</strong> ou planos a partir de <strong className="text-brand-700">R$47/mês</strong></span>
               </div>
 
               <p className="text-xl text-gray-600 leading-relaxed">
@@ -189,21 +148,17 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a 
-                  href="#cadastro"
+                  href="/simular"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 whatsapp-gradient text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg shadow-green-500/30"
-                  data-event="cta_hero_click"
+                  data-event="cta_simular_click"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                  Quero testar grátis
+                  🔍 Testar agora grátis
                 </a>
                 <a 
-                  href="/demo"
+                  href="#planos"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
                 >
-                  <span>▶️</span>
-                  Ver demo
+                  Ver planos e preços
                 </a>
               </div>
             </div>
@@ -290,119 +245,199 @@ export default function Home() {
       </section>
 
 
-      {/* CTA Form */}
-      <section id="cadastro" className="py-20 bg-gradient-to-b from-brand-600 to-brand-800">
+      {/* Planos e Preços */}
+      <section id="planos" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-6">
-                <span>🎁</span>
-                <span className="text-white font-medium">Teste grátis por tempo limitado</span>
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-brand-100 text-brand-700 rounded-full text-sm font-semibold mb-4">
+              Planos para imobiliárias
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Escolha o plano ideal para sua equipe
+            </h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+              Preços transparentes. Pague apenas pelo que usar. Sem surpresas.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {/* Consulta Avulsa */}
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-brand-300 hover:shadow-xl transition-all">
+              <div className="text-center mb-4">
+                <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Consulta Avulsa</h3>
+                <p className="text-gray-500 text-xs">Para testar o serviço</p>
               </div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-                Experimente sem compromisso
-              </h2>
-              <p className="text-brand-100 text-lg">
-                Deixe seu WhatsApp e ganhe acesso ao período de teste gratuito.
-              </p>
+              <div className="text-center mb-4">
+                <span className="text-3xl font-bold text-gray-900">R$9,90</span>
+                <span className="text-gray-500 text-sm">/consulta</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm">
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 1 diligência completa
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Certidões incluídas
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Processos verificados
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-gray-300">+</span> Matrícula: <strong>+R$25</strong>
+                </li>
+              </ul>
+              <a 
+                href="https://wa.me/5541987966912?text=🛒 QUERO COMPRAR - Consulta Avulsa R$9,90%0A%0AOlá! Quero contratar uma consulta avulsa por R$9,90.%0A%0AMeu nome: %0AImóvel (número matrícula ou endereço):"
+                target="_blank"
+                className="block w-full py-2.5 text-center bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all text-sm"
+                data-event="compra_avulsa"
+              >
+                Comprar agora
+              </a>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-4" data-form="lead_capture">
+            {/* Plano Starter */}
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-brand-300 hover:shadow-xl transition-all">
+              <div className="text-center mb-4">
+                <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Starter</h3>
+                <p className="text-gray-500 text-xs">Para corretores autônomos</p>
+              </div>
+              <div className="text-center mb-4">
+                <span className="text-3xl font-bold text-gray-900">R$47</span>
+                <span className="text-gray-500 text-sm">/mês</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm">
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 1 usuário (corretor)
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 5 diligências/mês
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Certidões + processos
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-gray-300">+</span> Matrícula: <strong>+R$25</strong>/cada
+                </li>
+              </ul>
+              <a 
+                href="https://wa.me/5541987966912?text=🛒 QUERO ASSINAR - Plano Starter R$47/mês%0A%0AOlá! Quero contratar o plano Starter (R$47/mês).%0A%0AMeu nome:%0AMeu CRECI (se tiver):"
+                target="_blank"
+                className="block w-full py-2.5 text-center bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all text-sm"
+                data-event="compra_starter"
+              >
+                Assinar plano
+              </a>
+            </div>
+
+            {/* Plano Profissional */}
+            <div className="bg-white rounded-2xl p-6 border-2 border-brand-500 shadow-xl relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                Mais popular
+              </div>
+              <div className="text-center mb-4">
+                <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Profissional</h3>
+                <p className="text-gray-500 text-xs">Para pequenas imobiliárias</p>
+              </div>
+              <div className="text-center mb-4">
+                <span className="text-3xl font-bold text-gray-900">R$147</span>
+                <span className="text-gray-500 text-sm">/mês</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm">
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Até 5 corretores
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 20 diligências/mês
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Certidões + processos
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 3 matrículas inclusas
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-gray-300">+</span> Extra: <strong>+R$25</strong>/matrícula
+                </li>
+              </ul>
+              <a 
+                href="https://wa.me/5541987966912?text=🛒 QUERO ASSINAR - Plano Profissional R$147/mês%0A%0AOlá! Quero contratar o plano Profissional (R$147/mês) para minha imobiliária.%0A%0ANome da imobiliária:%0AQuantos corretores:%0ACRECI:"
+                target="_blank"
+                className="block w-full py-2.5 text-center bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all text-sm"
+                data-event="compra_profissional"
+              >
+                Assinar plano
+              </a>
+            </div>
+
+            {/* Plano Imobiliária */}
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-brand-300 hover:shadow-xl transition-all">
+              <div className="text-center mb-4">
+                <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Imobiliária</h3>
+                <p className="text-gray-500 text-xs">Para equipes maiores</p>
+              </div>
+              <div className="text-center mb-4">
+                <span className="text-3xl font-bold text-gray-900">R$297</span>
+                <span className="text-gray-500 text-sm">/mês</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm">
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Até 15 corretores
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 50 diligências/mês
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> Certidões + processos
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-brand-500">✓</span> 10 matrículas inclusas
+                </li>
+                <li className="flex items-center gap-2 text-gray-600">
+                  <span className="text-gray-300">+</span> Extra: <strong>+R$25</strong>/matrícula
+                </li>
+              </ul>
+              <a 
+                href="https://wa.me/5541987966912?text=🛒 QUERO ASSINAR - Plano Imobiliária R$297/mês%0A%0AOlá! Quero contratar o plano Imobiliária (R$297/mês).%0A%0ANome da imobiliária:%0AQuantos corretores:%0ACRECI:"
+                target="_blank"
+                className="block w-full py-2.5 text-center bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all text-sm"
+                data-event="compra_imobiliaria"
+              >
+                Assinar plano
+              </a>
+            </div>
+          </div>
+
+          {/* Nota sobre o serviço */}
+          <div className="mt-12 max-w-3xl mx-auto">
+            <div className="bg-brand-50 border border-brand-200 rounded-xl p-6">
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <span className="text-brand-500 text-lg">📋</span>
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1">Nome Completo</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.nome}
-                      onChange={(e) => setFormData({...formData, nome: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white/20 outline-none"
-                      placeholder="Seu nome completo"
-                    />
+                    <strong className="text-brand-800">Análise completa de proprietários</strong>
+                    <p className="text-brand-700">Verificamos certidões e processos de todos os proprietários do imóvel.</p>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-white mb-1">WhatsApp *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.telefone}
-                      onChange={(e) => setFormData({...formData, telefone: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white/20 outline-none"
-                      placeholder="(11) 99999-9999"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-white mb-1">E-mail (opcional)</label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white/20 outline-none"
-                      placeholder="seu@email.com"
-                    />
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      id="isCorretor"
-                      checked={formData.isCorretor}
-                      onChange={(e) => setFormData({...formData, isCorretor: e.target.checked})}
-                      className="w-5 h-5 rounded border-white/30 bg-white/10 text-brand-500 focus:ring-brand-500 focus:ring-offset-0"
-                    />
-                    <label htmlFor="isCorretor" className="text-sm text-white/90 cursor-pointer">
-                      Sou corretor / imobiliária (CRECI)
-                    </label>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full py-4 bg-white text-brand-700 rounded-xl font-bold text-lg hover:scale-[1.02] transition-all shadow-lg disabled:opacity-70 flex items-center justify-center gap-2"
-                    data-event="form_submit"
-                  >
-                    {isLoading ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                        </svg>
-                        Enviando...
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Quero testar grátis
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-center text-sm text-white/60 mt-2">
-                    📩 Responderemos em até 24h para liberar seu teste grátis.
-                  </p>
-                </form>
-              ) : (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-3xl">🎉</span>
-                  </div>
-                  <h3 className="font-display text-2xl font-bold text-white mb-2">
-                    Recebemos seu contato!
-                  </h3>
-                  <p className="text-white/80">
-                    Em breve você receberá um exemplo de relatório no WhatsApp.
-                  </p>
                 </div>
-              )}
+                <div className="flex items-start gap-3">
+                  <span className="text-brand-500 text-lg">📄</span>
+                  <div>
+                    <strong className="text-brand-800">Matrícula atualizada: +R$25</strong>
+                    <p className="text-brand-700">Se você já tiver o PDF da matrícula, não há custo extra.</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* CTA Dúvidas */}
+          <div className="mt-12 text-center">
+            <p className="text-gray-500 text-sm">
+              Precisa de um plano personalizado? Entre em contato após escolher um plano.
+            </p>
           </div>
         </div>
       </section>
+
 
       {/* FAQ */}
       <section className="py-20">
@@ -443,23 +478,23 @@ export default function Home() {
       </section>
 
       {/* Urgência / CTA Final */}
-      <section className="py-12 bg-gradient-to-r from-amber-500 to-orange-500">
+      <section className="py-12 bg-gradient-to-r from-brand-600 to-brand-700">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                Corretor: evite perder vendas por documentação inadequada
+                Pronto para proteger sua comissão?
               </h3>
               <p className="text-white/90 text-lg">
-                Teste grátis por tempo limitado — comece agora mesmo.
+                Comece com uma consulta avulsa por apenas R$9,90.
               </p>
             </div>
             <a 
-              href="#cadastro"
-              className="flex-shrink-0 px-8 py-4 bg-white text-amber-600 rounded-xl font-bold text-lg hover:scale-105 transition-all shadow-lg"
+              href="#planos"
+              className="flex-shrink-0 px-8 py-4 bg-white text-brand-700 rounded-xl font-bold text-lg hover:scale-105 transition-all shadow-lg"
               data-event="cta_urgencia_click"
             >
-              Começar teste grátis
+              Escolher meu plano
             </a>
           </div>
         </div>
@@ -474,10 +509,9 @@ export default function Home() {
               <span className="font-display font-bold text-lg">Imóvel Limpo</span>
             </div>
             
-            <a href="https://wa.me/5511999999999" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-              <span>💬</span>
-              Fale conosco pelo WhatsApp
-            </a>
+            <p className="text-gray-400 text-sm">
+              Análise jurídica de imóveis via WhatsApp
+            </p>
             
             <p className="text-gray-400 text-sm">
               © 2025 Imóvel Limpo. Todos os direitos reservados.

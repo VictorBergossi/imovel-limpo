@@ -1,4 +1,66 @@
-# Imóvel Limpo - Landing Page
+# Imóvel Limpo
+
+Plataforma de análise jurídica de imóveis para corretores e imobiliárias.
+
+## Configuração
+
+### Variáveis de Ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
+
+```bash
+# Google Gemini API Key (para análise de matrículas)
+GEMINI_API_KEY=sua_chave_aqui
+
+# InfoSimples API Key (para consulta de certidões)
+INFOSIMPLES_API_KEY=sua_chave_aqui
+
+# Web3Forms (opcional - para captura de leads)
+NEXT_PUBLIC_WEB3FORMS_KEY=sua_chave_aqui
+```
+
+### Como obter as chaves
+
+1. **Gemini API**: Acesse https://aistudio.google.com/app/apikey
+2. **InfoSimples**: Cadastre-se em https://infosimples.com
+3. **Web3Forms**: Cadastre-se em https://web3forms.com (opcional)
+
+## Instalação
+
+```bash
+npm install
+npm run dev
+```
+
+## Estrutura do Projeto
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── analyze/     # API de análise de matrícula
+│   │   └── chat/        # API do chat com Gemini
+│   ├── demo/            # Página de demo
+│   ├── simular/         # Página de simulação com chat
+│   └── page.tsx         # Landing page
+├── components/
+│   ├── chat/            # Componentes do chat
+│   │   ├── ChatContainer.tsx
+│   │   ├── ChatBubble.tsx
+│   │   ├── ChatInput.tsx
+│   │   └── ReportCard.tsx
+│   └── ...
+└── lib/
+    ├── services/        # Integrações com APIs externas
+    │   ├── gemini.ts    # Google Gemini
+    │   └── infosimples.ts # InfoSimples
+    └── types/           # Tipos TypeScript
+        └── chat.ts
+```
+
+---
+
+## Documentação Original - Landing Page
 
 Landing page para validação de mercado do Imóvel Limpo - previsão de comissão e análise jurídica de imóveis via WhatsApp.
 
